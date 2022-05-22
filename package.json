@@ -22,6 +22,8 @@
     "@bytemd/plugin-gfm": "^1.15.0",
     "bulma-calendar": "^6.1.18",
     "firebase": "^9.8.1",
-    "snarkdown": "^2.0.0"
+    "snarkdown": "^2.0.0",
+    "twilio": "^3.77.1",
+    "twilio-client-mirror": "^0.0.2"
   }
 }

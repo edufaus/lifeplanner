@@ -2,18 +2,26 @@
   import {db} from "./firestore.js";
   import { collection, query, where, getDocs, addDoc} from "firebase/firestore";
   import snarkdown from 'snarkdown'
+  let phonenumber = ""
 
   let roomid = "0"
   const database = collection(db, "events")
+  const phonenumbers = collection(db, "phonenumbers")
   let roomEvents;
 
   let date = "2022-05-22"
   let time = "00:00"
   let eventTitle = ""
   let eventMarkdown = `Event Description (With Markdown)`
-  
   function reload(){
-    location.reload()
+    client.messages 
+      .create({ 
+         body: 'test message',  
+         messagingServiceSid: 'ACace2cc9491aa9f7ced0540634efb2ef3',      
+         to: '+1 786 714 7622' 
+       }) 
+      .then(message => console.log(message.sid)) 
+      .done();
   }
   export async function load({params}) {
     roomid = params.roomId
@@ -48,7 +56,6 @@ querySnapshot.forEach((doc) => {
       title: eventTitle,
       markdown: eventMarkdown
     }
-
     console.log(roomEvents, event, roomEvents.includes(event))
     if (roomEvents.includes(event) == true){
       return
@@ -56,9 +63,22 @@ querySnapshot.forEach((doc) => {
     console.log("roomevents",roomEvents)
     console.log("event", event)
     await addDoc(database,event)
-      .then(() =>
+      .then(async () => {
+        const q = query(phonenumbers, where("roomId", "==", roomid))
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach(async (doc) => {
+          let e = doc.data()
+          let c = await fetch("https://lifeplanner-server.herokuapp.com/sendmessage/"+e.phonenumber+"/"+"New-Event-Added-In-Room:"+roomid+"-event-title:"+eventTitle)
+      });
       location.reload()
+    }
       )
+  }
+  async function addPhoneNumber() {
+    await addDoc(phonenumbers,{
+      roomId: roomid,
+      phonenumber: phonenumber.replace(/[^+\d]+/g, "")
+    })
   }
   
 </script>
@@ -75,6 +95,14 @@ querySnapshot.forEach((doc) => {
   <div class="box has-text-centered">
     <div class="title is-1">Life Planner</div>
   <h1>The Room Id is {roomid}</h1>
+  <box>
+    <h1 class="title is-4">Add your phonenumber to get notifications</h1>
+    <input bind:value={phonenumber} placeholder="+17866137276 include +1 and do not put spaces" class="input">
+    <button on:click={addPhoneNumber} class="button is-primary">Add</button>
+    <br>
+    <br>
+    <br>
+  </box>
   <div class="box block">
     <h1>Create a new Event! <b>events are permanent</b></h1> 
     <input type="text" class="input" placeholder="Event Title" bind:value={eventTitle}>

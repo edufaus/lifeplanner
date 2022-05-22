@@ -35,7 +35,7 @@
 		<div class="button" on:click={createRoom}>Create Room</div>
 		<br>
 		<br>
-		<input type="number" class="input" placeholder="Room Id" bind:value={roomId}>
+		<input maxlength="8" type="number" class="input" placeholder="Room Id" bind:value={roomId}>
 		<br>
 		<br>
 		<a href={ "/room/" + roomId}><div class="button">Join Room</div></a>
