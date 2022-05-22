@@ -89,7 +89,7 @@ querySnapshot.forEach((doc) => {
 <link href="~bulma-calendar/dist/css/bulma-calendar.min.css" rel="stylesheet">
 <script src="~bulma-calendar/dist/js/bulma-calendar.min.js"></script>
 <svelte:head>
-	<title>About</title>
+	<title>Room: {roomid}</title>
 </svelte:head>
 <div class="cont">
   <div class="box has-text-centered">

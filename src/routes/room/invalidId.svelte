@@ -1,6 +1,7 @@
 <script>
 	let roomId = 0
 </script>
+<title>Invalid Room ID</title>
 <div class="box">
     <div class="title is-1 is-red">Invalid Room id</div>
 </div>
