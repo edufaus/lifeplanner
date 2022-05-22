@@ -1,14 +1,21 @@
-var firebaseConfig = {
-  apiKey: "AIzaSyDZkiV_5fbCfBK5hUUXRfPW8NtEILPS6wo",
-  authDomain: "redtweet-2.firebaseapp.com",
-  databaseURL: "https://redtweet-2.firebaseio.com",
-  projectId: "redtweet-2",
-  storageBucket: "redtweet-2.appspot.com",
-  messagingSenderId: "1081793695696",
-  appId: "1:1081793695696:web:84576b2c983dae4788f3d5",
-  measurementId: "G-4J9TW7309K"
+
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+
+// TODO: Replace the following with your app's Firebase project configuration
+// See: https://firebase.google.com/docs/web/learn-more#config-object
+let firebaseConfig = {
+  apiKey: "AIzaSyAouayCtY1vfQYR8MJDn_AMrkEDEPYsyNk",
+  authDomain: "lifeplanner-a1cea.firebaseapp.com",
+  projectId: "lifeplanner-a1cea",
+  storageBucket: "lifeplanner-a1cea.appspot.com",
+  messagingSenderId: "681439159972",
+  appId: "1:681439159972:web:681db05832924401632831"
 };
+
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-firebase.analytics();
-var db = firebase.firestore();
+const app = initializeApp(firebaseConfig);
+
+
+// Initialize Cloud Firestore and get a reference to the service
+export const db = getFirestore(app);

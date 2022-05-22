@@ -19,6 +19,9 @@
   },
   "type": "module",
   "dependencies": {
-    "firebase": "^9.8.1"
+    "@bytemd/plugin-gfm": "^1.15.0",
+    "bulma-calendar": "^6.1.18",
+    "firebase": "^9.8.1",
+    "snarkdown": "^2.0.0"
   }
 }

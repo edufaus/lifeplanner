@@ -1,9 +1,21 @@
-<script context="module" lang="ts">
-</script>
-
 
 
 <script>
+	import {db} from "./room/firestore.js";
+  import { collection, query, where, getDocs} from "firebase/firestore";
+	let roomId = 0
+	const database = collection(db, "events")
+	async function createRoom() {
+		var randomRoomId = Math.floor(10000000 + Math.random() * 90000000);
+		const q = query(database, where("roomId", "==", randomRoomId))
+    	const querySnapshot = await getDocs(q);
+		if (querySnapshot.size == 0) {
+			roomId = randomRoomId
+			location.href = "/room/" + roomId
+		} else {
+			return createRoom()
+		}
+	}
 </script>
 
 <svelte:head>
@@ -11,22 +23,23 @@
 </svelte:head>
 
 <section>
-	<h1>
-		<div class="welcome">
-			<picture>
-				<source srcset="svelte-welcome.webp" type="image/webp" />
-				<img src="svelte-welcome.png" alt="Welcome" />
-			</picture>
-		</div>
-
-		to your new<br />SvelteKit app
-	</h1>
-
-	<h2>
-		try editing <strong>src/routes/index.svelte</strong>
-	</h2>
-  <div class="button">Hello</div>
-
+	<div class="box">
+		<div class="title is-1">Life Planner</div>
+	</div>
+	<div class="box">
+		<div class="title is-3">
+			Plan events with others. Create a rooms and share your plans.
+			</div>
+	</div>
+	<div class="box">
+		<div class="button" on:click={createRoom}>Create Room</div>
+		<br>
+		<br>
+		<input type="number" class="input" placeholder="Room Id" bind:value={roomId}>
+		<br>
+		<br>
+		<a href={ "/room/" + roomId}><div class="button">Join Room</div></a>
+	</div>
 </section>
 
 <style>

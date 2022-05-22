@@ -1,12 +1,4 @@
 <script lang="ts">
-  import firebaseConfig from "../env"
-  import { initializeApp } from "firebase/app";
-  import { getFirestore } from "firebase/firestore";
-  console.log(firebaseConfig)
-  const app = initializeApp(firebaseConfig);
-  // const db = getFirestore(app);
-  console.log(app,getFirestore)
-  const db = getFirestore(app)
 </script>
 
 <!-- <Header /> -->
@@ -15,9 +7,9 @@
 	<slot />
 </main>
 
-<footer>
+<!-- <footer>
 	<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
-</footer>
+</footer> -->
 
 <style>
 	main {
