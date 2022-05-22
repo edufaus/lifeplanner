@@ -12,6 +12,11 @@
 </footer> -->
 
 <style>
+	:global() {
+		background-color: #f2eee2;
+		color: #0084f6;
+		transition: background-color 0.3s
+	}
 	main {
 		flex: 1;
 		display: flex;

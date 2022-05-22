@@ -7,11 +7,14 @@
   const database = collection(db, "events")
   let roomEvents;
 
-  let date = "2013-01-01"
+  let date = "2022-05-22"
   let time = "00:00"
   let eventTitle = ""
   let eventMarkdown = `Event Description (With Markdown)`
   
+  function reload(){
+    location.reload()
+  }
   export async function load({params}) {
     roomid = params.roomId
     if (isNaN(roomid) || roomid.length != 8) {
@@ -45,7 +48,11 @@ querySnapshot.forEach((doc) => {
       title: eventTitle,
       markdown: eventMarkdown
     }
-    roomEvents.push(event)
+
+    console.log(roomEvents, event, roomEvents.includes(event))
+    if (roomEvents.includes(event) == true){
+      return
+    }
     console.log("roomevents",roomEvents)
     console.log("event", event)
     await addDoc(database,event)
@@ -71,18 +78,23 @@ querySnapshot.forEach((doc) => {
   <div class="box block">
     <h1>Create a new Event! <b>events are permanent</b></h1> 
     <input type="text" class="input" placeholder="Event Title" bind:value={eventTitle}>
+    <br>
+    <br>
     <textarea class="textarea" bind:value={eventMarkdown} placeholder="Event Description (With Markdown)"/>
-    <input type="date" bind:value={date}>
-    <input type="time" bind:value={time}>
-    <div class="button" on:click={createEvent}>Create Event</div>
+    <div class="has-text-centered">
+      <input type="date" bind:value={date}>
+      <input type="time" bind:value={time}>
+      <div class="button" on:click={createEvent}>Create Event</div>
+    </div>
   </div>
   <div class="">
-    <h1>Events</h1> <div class="button" on:click={async function () {await getEvents(roomid)}}>Update Events</div>
+    <h1>Events</h1> <div class="button" on:click={reload}>Update Events</div>
     {#each roomEvents as event}
     <div class="box">
       <div class="rows">
         <div class="column">
-          <h1>{event.title}</h1>
+          <h1 class="title is-1">{event.title}</h1>
+          <hr>
           <div class="content">{@html snarkdown(event.markdown)}</div>
           <p>{event.date}</p>
           <p>{event.time}</p>

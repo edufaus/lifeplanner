@@ -27,11 +27,11 @@
 		<div class="title is-1">Life Planner</div>
 	</div>
 	<div class="box">
-		<div class="title is-3">
+		<div class="title is-3 has-text-centered">
 			Plan events with others. Create a rooms and share your plans.
 			</div>
 	</div>
-	<div class="box">
+	<div class="box has-text-centered">
 		<div class="button" on:click={createRoom}>Create Room</div>
 		<br>
 		<br>
