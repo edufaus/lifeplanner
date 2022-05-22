@@ -14,14 +14,7 @@
   let eventTitle = ""
   let eventMarkdown = `Event Description (With Markdown)`
   function reload(){
-    client.messages 
-      .create({ 
-         body: 'test message',  
-         messagingServiceSid: 'ACace2cc9491aa9f7ced0540634efb2ef3',      
-         to: '+1 786 714 7622' 
-       }) 
-      .then(message => console.log(message.sid)) 
-      .done();
+    location.reload()
   }
   export async function load({params}) {
     roomid = params.roomId
